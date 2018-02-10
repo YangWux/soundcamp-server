@@ -2,7 +2,9 @@ const express = require('express');
 const app = express();
 const router = express.Router();
 const PORT = process.env.PORT || 4200;
-const SONGKICK_API = process.env.TEST_VAR;
+
+// API keys
+const SONGKICK_API = process.env.SONGKICK_API; // env var set in heroku
 
 // the middleware
 router.use(function(req, res, next) {
