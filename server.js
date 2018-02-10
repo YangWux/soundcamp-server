@@ -38,7 +38,7 @@ router.get('/', function(req, res) {
 });
 
 // returns a list of venues with a query
-router.get('/venue/search/:query/:page', function(req, res) {
+router.get('/venues/search/:query/:page', function(req, res) {
   const query = 'query=' + req.params.query;
   const page = 'page=' + req.params.page;
   const resourceUrl = 'search/venues.json?'
@@ -50,7 +50,7 @@ router.get('/venue/search/:query/:page', function(req, res) {
 
 // returns a list of upcoming events at selected venue
 // example venue id: 1092 (The Catalyst, SC)
-router.get('/venue/:id/events/:page', function(req, res) {
+router.get('/venues/:id/events/:page', function(req, res) {
   const page = 'page=' + req.params.page;
   const resourceUrl = 'venues/' + req.params.id + '/calendar.json?'
   const url = urlBuilder(resourceUrl, [page])
