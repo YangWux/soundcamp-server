@@ -10,7 +10,7 @@ const request = require('request');
 // API keys
 require('dotenv').config()
 const SONGKICK_API = process.env.SONGKICK_API;
-//'io09K9l3ebJxmxe2';//process.env.SONGKICK_API; // env var set in heroku
+//process.env.SONGKICK_API; // env var set in heroku
 
 // CONSTS
 const PORT = process.env.PORT || 4200;
@@ -72,7 +72,7 @@ router.get('/artists/:id/gigography/:page', function(req, res) {
 
   });
 })
-// returns a list of events based on lat and lng 
+// returns a list of events based on lat and lng
 router.get('/locations/:lat&:lng/events/:page', function(req, res) {
   const location = 'location=geo:' + req.params.lat +','+req.params.lng;
   const page = 'page=' + req.params.page;
