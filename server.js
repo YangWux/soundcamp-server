@@ -59,6 +59,28 @@ router.get('/venues/:id/events/:page', function(req, res) {
   });
 })
 
+// returns a list of artists with a query
+router.get('/artists/search/:query/:page', function(req, res) {
+  const query = 'query=' + req.params.query;
+  const page = 'page=' + req.params.page;
+  const resourceUrl = 'search/artists.json?'
+  const url = urlBuilder(resourceUrl, [query, page])
+  request(url, function (error, response, body) {
+    res.send(JSON.parse(body));
+  });
+})
+
+// returns a list of upcoming events from artist
+// example venue id: 1092 (The Catalyst, SC)
+router.get('/artists/:id/events/:page', function(req, res) {
+  const page = 'page=' + req.params.page;
+  const resourceUrl = 'artists/' + req.params.id + '/calendar.json?'
+  const url = urlBuilder(resourceUrl, [page])
+  request(url, function (error, response, body) {
+    res.send(JSON.parse(body));
+  });
+})
+
 // prefix above routes with /api
 app.use('/api', router);
 
