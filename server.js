@@ -5,12 +5,26 @@ const express = require('express');
 const app = express();
 const router = express.Router();
 const request = require('request');
-
+const firebase = require('firebase');
 
 // API keys
 require('dotenv').config()
 const SONGKICK_API = process.env.SONGKICK_API;
+const FIREBASE_API = process.env.FIREBASE_API;
 //process.env.SONGKICK_API; // env var set in heroku
+
+// firebase config and init
+var config = {
+  apiKey: FIREBASE_API,
+  authDomain: "soundcamp-cmps183.firebaseapp.com",
+  databaseURL: "https://soundcamp-cmps183.firebaseio.com"
+};
+firebase.initializeApp(config);
+var database = firebase.database();
+// firebase useage:
+// .ref('path/to/db'): reference to a specific path in firebase database.
+// .set(...): (over)writes data to path referenced in .ref()
+// database.ref('path/to/data).set({ ... });
 
 // CONSTS
 const PORT = process.env.PORT || 4200;
