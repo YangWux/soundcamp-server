@@ -6,9 +6,11 @@ const app = express();
 const router = express.Router();
 const request = require('request');
 
+
 // API keys
 require('dotenv').config()
-const SONGKICK_API = process.env.SONGKICK_API; // env var set in heroku
+const SONGKICK_API = process.env.SONGKICK_API;
+//process.env.SONGKICK_API; // env var set in heroku
 
 // CONSTS
 const PORT = process.env.PORT || 4200;
@@ -45,6 +47,7 @@ router.get('/venues/search/:query/:page', function(req, res) {
   const url = urlBuilder(resourceUrl, [query, page])
   request(url, function (error, response, body) {
     res.send(JSON.parse(body));
+
   });
 })
 
@@ -56,8 +59,31 @@ router.get('/venues/:id/events/:page', function(req, res) {
   const url = urlBuilder(resourceUrl, [page])
   request(url, function (error, response, body) {
     res.send(JSON.parse(body));
+
   });
 })
+// returns a list of Artist’s past events (gigography)
+router.get('/artists/:id/gigography/:page', function(req, res) {
+  const page = 'page=' + req.params.page;
+  const resourceUrl = 'artists/' + req.params.id + '/gigography.json?'
+  const url = urlBuilder(resourceUrl, [page])
+  request(url, function (error, response, body) {
+    res.send(JSON.parse(body));
+
+  });
+})
+// returns a list of events based on lat and lng
+router.get('/locations/:Latlgn/events/:page', function(req, res) {
+
+  const page = 'page=' + req.params.page;
+  const resourceUrl = 'search/locations.json?'+'location=geo:' + req.params.Latlgn+'&';
+  const url = urlBuilder(resourceUrl, [page])
+  request(url, function (error, response, body) {
+    res.send(JSON.parse(body));
+    console.log(url);
+  });
+})
+
 
 // prefix above routes with /api
 app.use('/api', router);
