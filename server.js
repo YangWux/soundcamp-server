@@ -86,19 +86,32 @@ router.get('/artists/:id/gigography/:page', function(req, res) {
 
   });
 })
-// returns a list of events based on lat and lng
-router.get('/locations/:Latlgn/events/:page', function(req, res) {
+// returns a list of events based on query
 
+router.get('/locations/:query/events/:page', function(req, res) {
+  const query = 'query=' + req.params.query;
   const page = 'page=' + req.params.page;
-  const resourceUrl = 'search/locations.json?'+'location=geo:' + req.params.Latlgn+'&';
-  const url = urlBuilder(resourceUrl, [page])
+  const resourceUrl = 'search/locations.json?'
+  const url = urlBuilder(resourceUrl, [query,page])
   request(url, function (error, response, body) {
     res.send(JSON.parse(body));
     console.log(url);
   });
 })
 
+// returns a list of events based on lat and lng
+/*
+router.get('/locations/:Lat:lgn/events/:page', function(req, res) {
 
+  const page = 'page=' + req.params.page;
+  const resourceUrl = 'search/locations.json?'+'location=geo:' + req.params.Lat+ req.params.lgn+'&';
+  const url = urlBuilder(resourceUrl, [page])
+  request(url, function (error, response, body) {
+    res.send(JSON.parse(body));
+    console.log(url);
+  });
+})
+*/
 // returns a list of artists with a query
 router.get('/artists/search/:query/:page', function(req, res) {
   const query = 'query=' + req.params.query;
