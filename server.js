@@ -76,6 +76,26 @@ router.get('/venues/:id/events/:page', function(req, res) {
 
   });
 })
+
+router.get('/locations/search/:query/:page', function(req, res){
+	const query = 'query=' + req.params.query;
+	const page = 'page=' + req.params.page;
+	const resourceUrl = 'search/locations.json?'
+	const url = urlBuilder(resourceUrl, [query, page])
+	request(url, function (error, response, body) {
+		res.send(JSON.parse(body));
+	});
+})
+
+router.get('/locations/:id/events/:page', function(req, res){
+	const page = 'page=' + req.params.page;
+	const resourceUrl = 'metro_areas/' + req.params.id + '/calendar.json?'
+	const url = urlBuilder(resourceUrl, [page])
+	request(url, function (error, response, body) {
+		res.send(JSON.parse(body));
+	});
+})
+
 // returns a list of Artist’s past events (gigography)
 router.get('/artists/:id/gigography/:page', function(req, res) {
   const page = 'page=' + req.params.page;
@@ -101,8 +121,7 @@ router.get('/locations/:query/events/:page', function(req, res) {
 
 // returns a list of events based on lat and lng
 /*
-router.get('/locations/:Lat:lgn/events/:page', function(req, res) {
-
+router.get('/locations/:Lat/:lgn/events/:page', function(req, res) {
   const page = 'page=' + req.params.page;
   const resourceUrl = 'search/locations.json?'+'location=geo:' + req.params.Lat+ req.params.lgn+'&';
   const url = urlBuilder(resourceUrl, [page])
