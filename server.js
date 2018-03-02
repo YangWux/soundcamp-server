@@ -27,7 +27,7 @@ var database = firebase.database();
 // database.ref('path/to/data).set({ ... });
 
 // CONSTS
-const PORT = process.env.PORT || 4200;
+const PORT = process.env.PORT || 8000;
 const BASE_URL = 'http://api.songkick.com/api/3.0/';
 const PER_PAGE = 5;
 
@@ -45,6 +45,8 @@ function urlBuilder(resourceUrl, params) {
 // the middleware
 router.use(function(req, res, next) {
   console.log('middleware talking...');
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
 
