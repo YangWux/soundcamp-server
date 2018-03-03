@@ -57,7 +57,7 @@ router.get('/', function(req, res) {
 
 // the artist
 
-// returns a list of artists with a query works
+// returns a list of artists with a query
 router.get('/artists/search/:query/:page', function(req, res) {
   const query = 'query=' + req.params.query;
   const page = 'page=' + req.params.page;
@@ -79,7 +79,7 @@ router.get('/artists/:id/events/:page', function(req, res) {
   });
 })
 
-// returns a list of Artist’s past events (gigography) works
+// returns a list of Artist’s past events (gigography)
 // example artist id: 46745 (phish)
 router.get('/artists/:id/gigography/:page', function(req, res) {
   const page = 'page=' + req.params.page;
@@ -95,7 +95,7 @@ router.get('/artists/:id/gigography/:page', function(req, res) {
 
 // the location
 
-// return a list of locations based on query search works
+// return a list of locations based on query search
 router.get('/locations/search/:query/:page', function(req, res){
 	const query = 'query=' + req.params.query;
 	const page = 'page=' + req.params.page;
@@ -106,7 +106,7 @@ router.get('/locations/search/:query/:page', function(req, res){
 	});
 })
 
-// return a list of events in certain location works
+// return a list of events in certain location
 // example location id: 24426 (london)
 router.get('/locations/:id/events/:page', function(req, res){
 	const page = 'page=' + req.params.page;
@@ -119,7 +119,7 @@ router.get('/locations/:id/events/:page', function(req, res){
 
 
 
-// returns a list of events based on lat and lng not works
+// returns a list of events based on lat and lng
 // example lat,lng: 51.5078,-0.128
 router.get('/locations/:lat/:lgn/events/:page', function(req, res) {
   const page = 'page=' + req.params.page;
@@ -135,7 +135,7 @@ router.get('/locations/:lat/:lgn/events/:page', function(req, res) {
 
 // the venue
 
-// returns a list of venues with a query works
+// returns a list of venues with a query
 router.get('/venues/search/:query/:page', function(req, res) {
   const query = 'query=' + req.params.query;
   const page = 'page=' + req.params.page;
@@ -147,7 +147,7 @@ router.get('/venues/search/:query/:page', function(req, res) {
   });
 })
 
-// returns a list of upcoming events at selected venue works
+// returns a list of upcoming events at selected venue
 // example venue id: 1092 (The Catalyst, SC)
 router.get('/venues/:id/events/:page', function(req, res) {
   const page = 'page=' + req.params.page;
