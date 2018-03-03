@@ -87,7 +87,6 @@ router.get('/artists/:id/gigography/:page', function(req, res) {
   const url = urlBuilder(resourceUrl, [page])
   request(url, function (error, response, body) {
     res.send(JSON.parse(body));
-
   });
 })
 
@@ -117,8 +116,6 @@ router.get('/locations/:id/events/:page', function(req, res){
 	});
 })
 
-
-
 // returns a list of events based on lat and lng
 // example lat,lng: 51.5078,-0.128
 router.get('/locations/:lat/:lgn/events/:page', function(req, res) {
@@ -143,7 +140,6 @@ router.get('/venues/search/:query/:page', function(req, res) {
   const url = urlBuilder(resourceUrl, [query, page])
   request(url, function (error, response, body) {
     res.send(JSON.parse(body));
-
   });
 })
 
@@ -155,7 +151,6 @@ router.get('/venues/:id/events/:page', function(req, res) {
   const url = urlBuilder(resourceUrl, [page])
   request(url, function (error, response, body) {
     res.send(JSON.parse(body));
-
   });
 })
 
