@@ -55,84 +55,9 @@ router.get('/', function(req, res) {
   res.json({msg: 'it works!'});
 });
 
-// returns a list of venues with a query
-router.get('/venues/search/:query/:page', function(req, res) {
-  const query = 'query=' + req.params.query;
-  const page = 'page=' + req.params.page;
-  const resourceUrl = 'search/venues.json?'
-  const url = urlBuilder(resourceUrl, [query, page])
-  request(url, function (error, response, body) {
-    res.send(JSON.parse(body));
+// the artist
 
-  });
-})
-
-// returns a list of upcoming events at selected venue
-// example venue id: 1092 (The Catalyst, SC)
-router.get('/venues/:id/events/:page', function(req, res) {
-  const page = 'page=' + req.params.page;
-  const resourceUrl = 'venues/' + req.params.id + '/calendar.json?'
-  const url = urlBuilder(resourceUrl, [page])
-  request(url, function (error, response, body) {
-    res.send(JSON.parse(body));
-
-  });
-})
-
-router.get('/locations/search/:query/:page', function(req, res){
-	const query = 'query=' + req.params.query;
-	const page = 'page=' + req.params.page;
-	const resourceUrl = 'search/locations.json?'
-	const url = urlBuilder(resourceUrl, [query, page])
-	request(url, function (error, response, body) {
-		res.send(JSON.parse(body));
-	});
-})
-
-router.get('/locations/:id/events/:page', function(req, res){
-	const page = 'page=' + req.params.page;
-	const resourceUrl = 'metro_areas/' + req.params.id + '/calendar.json?'
-	const url = urlBuilder(resourceUrl, [page])
-	request(url, function (error, response, body) {
-		res.send(JSON.parse(body));
-	});
-})
-
-// returns a list of Artist’s past events (gigography)
-router.get('/artists/:id/gigography/:page', function(req, res) {
-  const page = 'page=' + req.params.page;
-  const resourceUrl = 'artists/' + req.params.id + '/gigography.json?'
-  const url = urlBuilder(resourceUrl, [page])
-  request(url, function (error, response, body) {
-    res.send(JSON.parse(body));
-
-  });
-})
-// returns a list of events based on query
-
-router.get('/locations/:query/events/:page', function(req, res) {
-  const query = 'query=' + req.params.query;
-  const page = 'page=' + req.params.page;
-  const resourceUrl = 'search/locations.json?'
-  const url = urlBuilder(resourceUrl, [query,page])
-  request(url, function (error, response, body) {
-    res.send(JSON.parse(body));
-    console.log(url);
-  });
-})
-
-// returns a list of events based on lat and lng
-router.get('/locations/:lat,:lgn/events/:page', function(req, res) {
-  const page = 'page=' + req.params.page;
-  const location = 'location=geo:' + req.params.lat + ',' + req.params.lgn;
-  const resourceUrl = 'search/locations.json?';
-  const url = urlBuilder(resourceUrl, [location,page])
-  request(url, function (error, response, body) {
-    res.send(JSON.parse(body));
-  });
-})
-
-// returns a list of artists with a query
+// returns a list of artists with a query works
 router.get('/artists/search/:query/:page', function(req, res) {
   const query = 'query=' + req.params.query;
   const page = 'page=' + req.params.page;
@@ -153,6 +78,88 @@ router.get('/artists/:id/events/:page', function(req, res) {
     res.send(JSON.parse(body));
   });
 })
+
+// returns a list of Artist’s past events (gigography) works
+// example artist id: 46745 (phish)
+router.get('/artists/:id/gigography/:page', function(req, res) {
+  const page = 'page=' + req.params.page;
+  const resourceUrl = 'artists/' + req.params.id + '/gigography.json?'
+  const url = urlBuilder(resourceUrl, [page])
+  request(url, function (error, response, body) {
+    res.send(JSON.parse(body));
+
+  });
+})
+
+// ==================================================
+
+// the location
+
+// return a list of locations based on query search works
+router.get('/locations/search/:query/:page', function(req, res){
+	const query = 'query=' + req.params.query;
+	const page = 'page=' + req.params.page;
+	const resourceUrl = 'search/locations.json?'
+	const url = urlBuilder(resourceUrl, [query, page])
+	request(url, function (error, response, body) {
+		res.send(JSON.parse(body));
+	});
+})
+
+// return a list of events in certain location works
+// example location id: 24426 (london)
+router.get('/locations/:id/events/:page', function(req, res){
+	const page = 'page=' + req.params.page;
+	const resourceUrl = 'metro_areas/' + req.params.id + '/calendar.json?'
+	const url = urlBuilder(resourceUrl, [page])
+	request(url, function (error, response, body) {
+		res.send(JSON.parse(body));
+	});
+})
+
+
+
+// returns a list of events based on lat and lng not works
+// example lat,lng: 51.5078,-0.128
+router.get('/locations/:lat/:lgn/events/:page', function(req, res) {
+  const page = 'page=' + req.params.page;
+  const location = 'location=geo:' + req.params.lat + ',' + req.params.lgn;
+  const resourceUrl = 'events.json?';
+  const url = urlBuilder(resourceUrl, [location,page])
+  request(url, function (error, response, body) {
+    res.send(JSON.parse(body));
+  });
+})
+
+// ==================================================
+
+// the venue
+
+// returns a list of venues with a query works
+router.get('/venues/search/:query/:page', function(req, res) {
+  const query = 'query=' + req.params.query;
+  const page = 'page=' + req.params.page;
+  const resourceUrl = 'search/venues.json?'
+  const url = urlBuilder(resourceUrl, [query, page])
+  request(url, function (error, response, body) {
+    res.send(JSON.parse(body));
+
+  });
+})
+
+// returns a list of upcoming events at selected venue works
+// example venue id: 1092 (The Catalyst, SC)
+router.get('/venues/:id/events/:page', function(req, res) {
+  const page = 'page=' + req.params.page;
+  const resourceUrl = 'venues/' + req.params.id + '/calendar.json?'
+  const url = urlBuilder(resourceUrl, [page])
+  request(url, function (error, response, body) {
+    res.send(JSON.parse(body));
+
+  });
+})
+
+// ==================================================
 
 // prefix above routes with /api
 app.use('/api', router);
