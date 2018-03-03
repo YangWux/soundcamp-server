@@ -122,17 +122,16 @@ router.get('/locations/:query/events/:page', function(req, res) {
 })
 
 // returns a list of events based on lat and lng
-/*
-router.get('/locations/:Lat/:lgn/events/:page', function(req, res) {
+router.get('/locations/:lat,:lgn/events/:page', function(req, res) {
   const page = 'page=' + req.params.page;
-  const resourceUrl = 'search/locations.json?'+'location=geo:' + req.params.Lat+ req.params.lgn+'&';
-  const url = urlBuilder(resourceUrl, [page])
+  const location = 'location=geo:' + req.params.lat + ',' + req.params.lgn;
+  const resourceUrl = 'search/locations.json?';
+  const url = urlBuilder(resourceUrl, [location,page])
   request(url, function (error, response, body) {
     res.send(JSON.parse(body));
-    console.log(url);
   });
 })
-*/
+
 // returns a list of artists with a query
 router.get('/artists/search/:query/:page', function(req, res) {
   const query = 'query=' + req.params.query;
