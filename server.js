@@ -55,6 +55,8 @@ router.get('/', function(req, res) {
   res.json({msg: 'it works!'});
 });
 
+// ==================================================
+
 // the artist
 
 // returns a list of artists with a query
@@ -84,7 +86,8 @@ router.get('/artists/:id/events/:page', function(req, res) {
 router.get('/artists/:id/gigography/:page', function(req, res) {
   const page = 'page=' + req.params.page;
   const resourceUrl = 'artists/' + req.params.id + '/gigography.json?'
-  const url = urlBuilder(resourceUrl, [page])
+  const order = 'order=desc';
+  const url = urlBuilder(resourceUrl, [page, order])
   request(url, function (error, response, body) {
     res.send(JSON.parse(body));
   });
@@ -155,6 +158,16 @@ router.get('/venues/:id/events/:page', function(req, res) {
 })
 
 // ==================================================
+
+// firebase storage (dont need this for now...)
+
+// router.get('/session/save/:artistid', function(req, res) {
+//   database.ref('path/to/data').set({
+//     userId: '1',
+//     artistId: '3322'
+//   });
+//   res.json({msg: 'it works!'});
+// })
 
 // prefix above routes with /api
 app.use('/api', router);
